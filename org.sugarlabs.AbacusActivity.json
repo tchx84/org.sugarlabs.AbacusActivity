@@ -1,0 +1,74 @@
+    {
+    "app-id": "org.sugarlabs.AbacusActivity",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.28",
+    "sdk": "org.gnome.Sdk",
+    "build-options": {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g",
+        "env": {
+            "V": "1",
+            "PERL5LIB": "/app/lib/perl/site_perl/5.22.1/",
+            "PYTHON_VERSION": "2"
+        }
+    },
+    "command": "sugarapp",
+    "finish-args": [
+        "--socket=x11",
+        "--socket=wayland",
+        "--socket=pulseaudio",
+        "--share=ipc",
+        "--device=dri",
+        "--filesystem=home",
+        "--filesystem=xdg-run/dconf",
+        "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--env=SUGAR_BUNDLE_ID=org.sugarlabs.AbacusActivity",
+        "--env=SUGAR_BUNDLE_PATH=/app/share/sugar/activities/Abacus.activity"
+    ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/share/aclocal",
+        "/share/info",
+        "/share/man"
+    ],
+    "modules": [
+        "sugar-shared-modules/sugar/artwork.json",
+        "sugar-shared-modules/sugar/toolkit-gtk3.json",
+        "sugar-shared-modules/python/sugarapp.json",
+        {
+            "name": "abacus",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python${PYTHON_VERSION} setup.py install --prefix=${FLATPAK_DEST} --skip-install-desktop-file --skip-install-mime"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/sugarlabs/activity-abacus.git",
+                    "branch": "master"
+                },
+                {
+                    "type": "patch",
+                    "path": "abacus-port.patch"
+                },
+                {
+                    "type": "file",
+                    "path": "org.sugarlabs.AbacusActivity.desktop"
+                },
+                {
+                    "type": "file",
+                    "path": "org.sugarlabs.AbacusActivity.xml"
+                }
+            ],
+            "post-install": [
+                "install -D org.sugarlabs.AbacusActivity.desktop /app/share/applications/org.sugarlabs.AbacusActivity.desktop",
+                "install -D activity/activity-abacus.svg /app/share/icons/hicolor/scalable/apps/org.sugarlabs.AbacusActivity.svg",
+                "install -D org.sugarlabs.AbacusActivity.xml /app/share/mime/packages/org.sugarlabs.AbacusActivity.xml",
+                "install -D org.sugarlabs.AbacusActivity.xml /app/share/sugar/activities/Abacus.activity/activity/mimetypes.xml"
+            ]
+        }
+    ]
+}

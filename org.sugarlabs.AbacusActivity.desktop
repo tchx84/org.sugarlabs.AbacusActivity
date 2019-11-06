@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Abacus
+GenericName=Abacus
+TryExec=sugarapp
+Exec=sugarapp
+Icon=org.sugarlabs.AbacusActivity
+Type=Application
+Comment=Abacus
+Terminal=false
+StartupNotify=true
+Categories=Education;
+MimeType=application/x-abacus-activity;
