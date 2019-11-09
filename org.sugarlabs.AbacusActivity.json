@@ -50,7 +50,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/sugarlabs/activity-abacus.git",
-                    "branch": "master"
+                    "tag": "v60"
                 },
                 {
                     "type": "patch",
