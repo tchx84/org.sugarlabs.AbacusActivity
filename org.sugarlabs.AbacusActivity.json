@@ -54,20 +54,17 @@
                 },
                 {
                     "type": "file",
-                    "path": "org.sugarlabs.AbacusActivity.desktop"
-                },
-                {
-                    "type": "file",
-                    "path": "org.sugarlabs.AbacusActivity.xml"
+                    "path": "mimetypes.xml"
                 }
             ],
             "post-install": [
-                "sugarapp-gen-appdata --info activity/activity.info --appdata appdata.xml",
-                "install -D org.sugarlabs.AbacusActivity.desktop /app/share/applications/org.sugarlabs.AbacusActivity.desktop",
+                "sugarapp-gen-appdata activity/activity.info appdata",
+                "sugarapp-gen-desktop activity/activity.info desktop --mimetype mimetypes.xml",
+                "install -D appdata /app/share/metainfo/org.sugarlabs.AbacusActivity.appdata.xml",
+                "install -D desktop /app/share/applications/org.sugarlabs.AbacusActivity.desktop",
                 "install -D activity/activity-abacus.svg /app/share/icons/hicolor/scalable/apps/org.sugarlabs.AbacusActivity.svg",
-                "install -D org.sugarlabs.AbacusActivity.xml /app/share/mime/packages/org.sugarlabs.AbacusActivity.xml",
-                "install -D org.sugarlabs.AbacusActivity.xml /app/share/sugar/activities/Abacus.activity/activity/mimetypes.xml",
-                "install -D appdata.xml /app/share/metainfo/org.sugarlabs.AbacusActivity.appdata.xml"
+                "install -D mimetypes.xml /app/share/mime/packages/org.sugarlabs.AbacusActivity.xml",
+                "install -D mimetypes.xml /app/share/sugar/activities/Abacus.activity/activity/mimetypes.xml"
             ]
         }
     ]
